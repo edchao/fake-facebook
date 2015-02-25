@@ -13,6 +13,8 @@
 		F3CE03E41A9D792400EA863A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3CE03E31A9D792400EA863A /* Images.xcassets */; };
 		F3CE03E71A9D792400EA863A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3CE03E51A9D792400EA863A /* LaunchScreen.xib */; };
 		F3CE03F31A9D792400EA863A /* fake_facebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE03F21A9D792400EA863A /* fake_facebookTests.swift */; };
+		F3CE03FD1A9D7A3D00EA863A /* lightboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE03FC1A9D7A3D00EA863A /* lightboxViewController.swift */; };
+		F3CE03FF1A9D7A4B00EA863A /* feedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE03FE1A9D7A4B00EA863A /* feedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		F3CE03EC1A9D792400EA863A /* fake-facebookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fake-facebookTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3CE03F11A9D792400EA863A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3CE03F21A9D792400EA863A /* fake_facebookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_facebookTests.swift; sourceTree = "<group>"; };
+		F3CE03FC1A9D7A3D00EA863A /* lightboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lightboxViewController.swift; sourceTree = "<group>"; };
+		F3CE03FE1A9D7A4B00EA863A /* feedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 			children = (
 				F3CE03DC1A9D792400EA863A /* AppDelegate.swift */,
 				F3CE03DE1A9D792400EA863A /* ViewController.swift */,
+				F3CE03FC1A9D7A3D00EA863A /* lightboxViewController.swift */,
+				F3CE03FE1A9D7A4B00EA863A /* feedViewController.swift */,
 				F3CE03E01A9D792400EA863A /* Main.storyboard */,
 				F3CE03E31A9D792400EA863A /* Images.xcassets */,
 				F3CE03E51A9D792400EA863A /* LaunchScreen.xib */,
@@ -212,7 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3CE03FD1A9D7A3D00EA863A /* lightboxViewController.swift in Sources */,
 				F3CE03DF1A9D792400EA863A /* ViewController.swift in Sources */,
+				F3CE03FF1A9D7A4B00EA863A /* feedViewController.swift in Sources */,
 				F3CE03DD1A9D792400EA863A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +413,7 @@
 				F3CE03F81A9D792400EA863A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3CE03F91A9D792400EA863A /* Build configuration list for PBXNativeTarget "fake-facebookTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +422,7 @@
 				F3CE03FB1A9D792400EA863A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
