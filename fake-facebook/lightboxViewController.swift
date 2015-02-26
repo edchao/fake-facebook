@@ -20,6 +20,11 @@ class lightboxViewController: UIViewController {
         // SHOWN IMAGE SETUP
         
         shownImageView = UIImageView(image:shownImage)
+        shownImageView.frame = CGRect(x: 0, y: 30, width: 320, height: 500)
+        shownImageView.userInteractionEnabled = true
+        shownImageView.contentMode = .ScaleAspectFill
+        shownImageView.clipsToBounds = true
+        
         view.addSubview(shownImageView)
        
         // BUTTON SETUP

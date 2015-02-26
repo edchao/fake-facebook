@@ -8,7 +8,10 @@
 
 import UIKit
 
-class feedViewController: UIViewController, UIGestureRecognizerDelegate {
+class feedViewController: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+    
+    var isPresenting: Bool = true
+    let transitionSpeed : NSTimeInterval! = 0.5
 
     // PROPS
     
@@ -29,10 +32,15 @@ class feedViewController: UIViewController, UIGestureRecognizerDelegate {
     var weddingImageViewE : UIImageView!
    
     var selectedImageView : UIImageView!
+    
+    var blackView : UIView!
+    var tempView: UIImageView!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         // SETUP SCROLL VIEW
         
@@ -98,8 +106,6 @@ class feedViewController: UIViewController, UIGestureRecognizerDelegate {
         weddingImageViewE.frame = CGRect(x: 162, y: 296, width: 150, height: 102)
         
         
-        
-        
         // SETUP GESTURES
         
         var tapAGesture = UITapGestureRecognizer(target: self, action: "didTap:")
@@ -122,6 +128,8 @@ class feedViewController: UIViewController, UIGestureRecognizerDelegate {
         tapEGesture.delegate = self
         weddingImageViewE.addGestureRecognizer(tapEGesture)
         
+        
+
     }
     
     
@@ -133,15 +141,104 @@ class feedViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    // PREPARE SEGUE : SET VALUE
+    // PREPARE SEGUE : USE CUSTOM PRESENTATION/TRANSITION & SET VALUE
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         var destinationViewController = segue.destinationViewController as lightboxViewController
+        destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        destinationViewController.transitioningDelegate = self
         destinationViewController.shownImage = self.selectedImageView.image
         
     }
     
+    
+    // TRANSITION DELEGATE METHODS
+    
+    func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        isPresenting = true
+        return self
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        isPresenting = false
+        return self
+    }
 
+    
+    // TRANSITION CONTROL
+    
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+        return self.transitionSpeed
+    }
+    
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        // When transitioning, toVC gets injected into the container
+        // within the container, the toVC is set to pre-transition state
+        // within the container, the toVC is then animated to post-transition state
+        println("animating transition")
+        var containerView = transitionContext.containerView()
+        var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        
+        
+        if (isPresenting) {
+            
+            // INJECT VIEW
+            self.blackView = UIView(frame: fromViewController.view.frame)
+            self.blackView.backgroundColor = UIColor.blackColor()
+            self.blackView.alpha = 0
+            containerView.addSubview(self.blackView)
+            
+            // INJECT TEMP IMAGE VIEW
+            
+            self.tempView = UIImageView(image:self.selectedImageView.image)
+            self.tempView.frame = selectedImageView.frame
+            self.tempView.userInteractionEnabled = true
+            self.tempView.contentMode = .ScaleAspectFill
+            self.tempView.clipsToBounds = true
+            containerView.addSubview(self.tempView)
+            
+            // INJECT toVC
+            containerView.addSubview(toViewController.view)
+    
+            
+            // INITIAL STATE OF toVC
+            toViewController.view.alpha = 0
+            
+            
+            UIView.animateWithDuration(self.transitionSpeed, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 13.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                
+                self.tempView.frame = CGRect(x: 0, y: 30, width: 320, height: 500)
+                self.blackView.alpha = 1
+
+                
+            }, completion: { (Bool) -> Void in
+                toViewController.view.alpha = 1
+                transitionContext.completeTransition(true)
+
+            })
+            
+        } else {
+            fromViewController.view.alpha = 0
+            
+            UIView.animateWithDuration(self.transitionSpeed, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 13.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                
+                self.blackView.alpha = 0
+                self.tempView.frame = self.selectedImageView.frame
+                
+
+                
+            }, completion: { (Bool) -> Void in
+                    self.tempView.removeFromSuperview()
+                    self.blackView.removeFromSuperview()
+                    transitionContext.completeTransition(true)
+                    fromViewController.view.removeFromSuperview()
+            })
+        }
+    }
+
+    
     override func didReceiveMemoryWarning() {
 
         super.didReceiveMemoryWarning()
