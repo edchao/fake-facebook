@@ -13,6 +13,10 @@ class lightboxViewController: UIViewController {
     var shownImage : UIImage!
     var shownImageView: UIImageView!
     var doneButton: UIButton!
+    var actionsImage: UIImage!
+    var actionsImageView: UIImageView!
+    
+    var doneImage : UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +24,7 @@ class lightboxViewController: UIViewController {
         // SHOWN IMAGE SETUP
         
         shownImageView = UIImageView(image:shownImage)
-        shownImageView.frame = CGRect(x: 0, y: 30, width: 320, height: 500)
+        shownImageView.frame = CGRect(x: 0, y: 50, width: 320, height: 470)
         shownImageView.userInteractionEnabled = true
         shownImageView.contentMode = .ScaleAspectFill
         shownImageView.clipsToBounds = true
@@ -29,20 +33,29 @@ class lightboxViewController: UIViewController {
        
         // BUTTON SETUP
         
-        doneButton = UIButton.buttonWithType(.System) as? UIButton
-        doneButton.frame = CGRect(x: 110, y: 70, width: 100, height: 44)
-        doneButton.setTitle("Press Me", forState: .Normal)
-        doneButton.setTitle("I'm Pressed", forState: .Highlighted)
+        doneImage = UIImage(named:"doneButton")
+        doneButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
+        doneButton.frame = CGRect(x: 250, y: 16, width: 51, height: 27)
+        doneButton.setImage(doneImage, forState: .Normal)
+     
         doneButton.addTarget(self,
             action: "doneButtonTapped:",
             forControlEvents: .TouchUpInside)
-
         view.addSubview(doneButton)
+
+
+        // ACTIONS IMAGE
+        
+        actionsImage = UIImage(named:"photo_actions")
+        actionsImageView = UIImageView(image:actionsImage)
+        actionsImageView.frame = CGRect(x: 0, y: 524, width: 320, height: 44)
+
+        view.addSubview(actionsImageView)
         
 
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
