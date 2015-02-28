@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3A542171AA15A040043C3D8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A542161AA15A040043C3D8 /* Common.swift */; };
 		F3CE03DD1A9D792400EA863A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE03DC1A9D792400EA863A /* AppDelegate.swift */; };
 		F3CE03DF1A9D792400EA863A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE03DE1A9D792400EA863A /* ViewController.swift */; };
 		F3CE03E21A9D792400EA863A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3CE03E01A9D792400EA863A /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3A542161AA15A040043C3D8 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		F3CE03D71A9D792400EA863A /* fake-facebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fake-facebook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3CE03DB1A9D792400EA863A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3CE03DC1A9D792400EA863A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		F3CE03D91A9D792400EA863A /* fake-facebook */ = {
 			isa = PBXGroup;
 			children = (
+				F3A542161AA15A040043C3D8 /* Common.swift */,
 				F3CE03DC1A9D792400EA863A /* AppDelegate.swift */,
 				F3CE03DE1A9D792400EA863A /* ViewController.swift */,
 				F3CE03FC1A9D7A3D00EA863A /* lightboxViewController.swift */,
@@ -221,6 +224,7 @@
 				F3CE03FD1A9D7A3D00EA863A /* lightboxViewController.swift in Sources */,
 				F3CE03DF1A9D792400EA863A /* ViewController.swift in Sources */,
 				F3CE03FF1A9D7A4B00EA863A /* feedViewController.swift in Sources */,
+				F3A542171AA15A040043C3D8 /* Common.swift in Sources */,
 				F3CE03DD1A9D792400EA863A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

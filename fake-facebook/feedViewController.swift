@@ -48,6 +48,7 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         super.viewDidLoad()
 
         
+        
         // SETUP SCROLL VIEW
         
         feedImage = UIImage(named: "home_feed")
@@ -55,7 +56,6 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         feedImageView.userInteractionEnabled = true
         scrollOffset = 0.0
         
-//        feedScrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
         feedScrollView = UIScrollView(frame: CGRect(x: 0, y: 110, width: 320, height: 458))
 
         feedScrollView.addSubview(self.feedImageView)
@@ -140,6 +140,7 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         
         
         // SETUP NAV VIEW
+        
         navImage = UIImage(named: "nav")
         navImageView = UIImageView(image:navImage)
         navImageView.frame = CGRect(x: 0, y: 0, width: 320, height: 64)
@@ -155,6 +156,7 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     }
     
     // SET SCROLL OFFSET FOR IMAGE POSITIONING
+    
     func scrollViewDidScroll(scrollView: UIScrollView){
         
         scrollOffset = CGFloat(feedScrollView.contentOffset.y)
@@ -164,11 +166,20 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     
     
     // GESTURE : TAP
+    
     func didTap(sender:UITapGestureRecognizer) {
         
         selectedImageView = sender.view as UIImageView
         performSegueWithIdentifier("lightBoxSegue", sender: self)
         
+    }
+    
+
+    
+    // GESTURE: TAPPY
+    
+    func didTappy(sender:UITapGestureRecognizer){
+        println("taptap!")
     }
     
     // PREPARE SEGUE : USE CUSTOM PRESENTATION/TRANSITION & SET VALUE
@@ -214,7 +225,8 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         
         if (isPresenting) {
             
-            // INJECT VIEW
+            // INJECT BLACK OVERLAY VIEW  // NOTE TO SELF THIS SHOULD GO IN THE OTHER VC
+            
             self.blackView = UIView(frame: fromViewController.view.frame)
             self.blackView.backgroundColor = UIColor.blackColor()
             self.blackView.alpha = 0
@@ -225,18 +237,24 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
             self.tempView = UIImageView(image:self.selectedImageView.image)
             self.tempView.frame = self.selectedImageView.frame
             self.tempView.center = CGPoint(x: self.selectedImageView.center.x, y: 110 + self.selectedImageView.center.y - self.scrollOffset)
-            self.tempView.userInteractionEnabled = true
             self.tempView.contentMode = .ScaleAspectFill
             self.tempView.clipsToBounds = true
+            self.tempView.userInteractionEnabled = true
+
+            
             containerView.addSubview(self.tempView)
             
+            
             // INJECT toVC
+            
             containerView.addSubview(toViewController.view)
     
             
             // INITIAL STATE OF toVC
+            
             toViewController.view.alpha = 0
             
+            // FORWARD ANIMATION
             
             UIView.animateWithDuration(self.transitionSpeed, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 13.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 
@@ -246,17 +264,29 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
                 
             }, completion: { (Bool) -> Void in
                 
+                // ANIMATE IN toVC
+                
                 UIView.animateWithDuration(0.2, animations: { () -> Void in
                     toViewController.view.alpha = 1
-                }, completion: { (Bool) -> Void in
-                    transitionContext.completeTransition(true)
 
+                }, completion: { (Bool) -> Void in
+                    
+                    transitionContext.completeTransition(true)
                 })
 
             })
             
         } else {
+            
+            
             fromViewController.view.alpha = 0
+            
+            // CASTING FROMVC
+            var lightBoxVC = fromViewController as lightboxViewController
+            var foo = lightBoxVC.shownImageView
+            self.tempView.center = foo.center
+            
+            // REVERSE ANIMATION
             
             UIView.animateWithDuration(self.transitionSpeed, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 13.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 
@@ -279,6 +309,7 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         super.didReceiveMemoryWarning()
 
     }
+
     
 
 
