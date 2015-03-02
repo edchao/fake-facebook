@@ -176,12 +176,6 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     
 
     
-    // GESTURE: TAPPY
-    
-    func didTappy(sender:UITapGestureRecognizer){
-        println("taptap!")
-    }
-    
     // PREPARE SEGUE : USE CUSTOM PRESENTATION/TRANSITION & SET VALUE
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -283,8 +277,7 @@ class feedViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
             
             // CASTING FROMVC
             var lightBoxVC = fromViewController as lightboxViewController
-            var foo = lightBoxVC.shownImageView
-            self.tempView.center = foo.center
+            self.tempView.center = lightBoxVC.shownImageView.center
             
             // REVERSE ANIMATION
             
